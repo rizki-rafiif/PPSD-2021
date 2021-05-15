@@ -26,8 +26,8 @@ public class DoublyLinkList implements List{
     // selalu menambahkan pada akhir list
     public void addLast(Node input) {
         if (isEmpty()){
-            head = tail;
-            tail = head;
+            head = input;
+            tail = input;
         } else {
             tail.kanan = input;
             input.kiri = tail;
