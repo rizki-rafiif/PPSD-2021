@@ -95,103 +95,39 @@ public class BinarySearchTree {
     }
 
     // method remove yang dipanggil di main
-    void remove (int input){
-        if (this.remove(input, root) == null){
-            System.out.println("Data "+input+" tidak ada dalam tree!");
-
-        } else {
-            root = remove(input, root);
-        }
+    public void remove(int input) {
+        root = remove(input, root);
     }
 
     // method remove yang kedua (double parameter)
     // remove yang ini beda dengan modul
-    private Node remove (int input, Node root){
-        // pointer untuk menyimpan data pada node saat ini
-        Node parent = null;
-        Node temp = root;
-
-        // mencari inputan di dalam tree kemudian
-        while (temp != null && temp.data != input)
-        {
-            // update parent dengan node saat ini (dari root, terus ke parent kiri/kanan, dst)
-            parent = temp;
-
-            // menentukan arah pencarian inputan, lebih kecil maka kekiri,
-            // lebih besar maka ke kanan
-            if (input < temp.data) {
-                temp = temp.left;
-            }
-            else {
-                temp = temp.right;
-            }
-        }
-        // return null jika tidak ketemu
+    private Node remove(int input, Node temp) {
         if (temp == null) {
-            return root;
+            return null;
         }
 
-        // untuk menghapus data di BST berdasarkan input perlu melalui dibagi menjadi 3
-        // yaitu yang pertama :
-        // jika node yang dihapus tidak memiliki children
-        // dalam artian yang dihapus adalah leaf
-        if (temp.left == null && temp.right == null)
-        {
-            // jika proses memasuki sini maka otomatis dia adalah child / leaf
-            // yang di if ini jika dia leaf tapi bukan root
-            if (temp != root)
-            {
-                if (parent.left == temp) {
-                    parent.left = null;
-                }
-                else {
-                    parent.right = null;
-                }
+        if (input == temp.data) {
+            if (temp.left == null && temp.right == null) {
+                return null;
             }
-            // kemudian ini jika dia adalah root
-            else {
-                root = null;
+
+            if (temp.left == null) {
+                return temp.right;
             }
+
+            if (temp.right == null) {
+                return temp.left;
+            }
+
+            temp.data = temp.right.data;
+            temp.right = remove(temp.data, temp.right);
+        } else if (input < temp.data) {
+            temp.left = remove(input, temp.left);
+        } else {
+            temp.right = remove(input, temp.right);
         }
 
-        // yang kedua, jika node yang dihapus memiliki 2 child
-        else if (temp.left != null && temp.right != null)
-        {
-            // pertama kita mencari node successor / node yang berada dibawah node tertentu
-            // atau bisa dibilang disini node yang terkecil
-            Node successor = findMin();
-            // kemudian menyimpan nilai milik successor ke dalam variabel val
-            int val = successor.data;
-
-            // untuk penghapusan kita menggunakan recursive untuk menghapusnya
-            remove(successor.data, root);
-            // menaruh nilai successor tadi ke node saat ini (dia akan naik jadi parent)
-            temp.data = val;
-        }
-
-        // yang ketiga adalah jika node yang dihapus hanya memiliki satu child
-        else {
-            // memilih child mana yang akan dihapus dengan mengecek yang mana yang null
-            Node child = (temp.left != null)? temp.left: temp.right;
-
-            // jika node yang dihapus bukan root maka mengganti parentnya dengan childnya
-            // maksudnya adalah child dari parent itu naik ke atas, menggantikan parentnya
-            if (temp != root)
-            {
-                if (temp == parent.left) {
-                    parent.left = child;
-                }
-                else {
-                    parent.right = child;
-                }
-            }
-
-            // kalau misal yang akan dihapus itu merupakn rootnya, maka tinggal
-            else {
-                root = child;
-            }
-        }
-        return root;
+        return temp;
     }
 
     // method lanjutan checking
