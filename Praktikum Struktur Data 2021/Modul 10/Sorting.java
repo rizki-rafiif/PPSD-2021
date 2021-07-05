@@ -18,23 +18,6 @@ public class Sorting {
         return data;
     }
 
-    public static void Opt_bubbleSort(int data[]){
-        int n = data.length;
-        boolean doMore = true;
-        while(doMore){
-            n--;
-            doMore = false;
-            for(i = 0; i<n; i++){
-                if(data[i] > data[i + 1]){
-                    temp = data[i];
-                    data[i] = data[i + 1];
-                    data[i + 1] = temp;
-                    doMore = true;
-                }
-            }
-        }
-    }
-
     public static int[] selectionSort(int data[]){
         for(i = 0; i <data.length - 1; i++){
             pos = i;
