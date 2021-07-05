@@ -6,10 +6,9 @@ public class Method_main {
     public static void printPilihan() {
         System.out.print("Pilihan Anda :\n"
                 + "1.  Bubble Sort\n"
-                + "2.  Optimalisasi Bubble Sort\n"
-                + "3.  Selection Sort\n"
-                + "4.  Insertion Sort\n"
-                + "5.  Keluar\n"
+                + "2.  Selection Sort\n"
+                + "3.  Insertion Sort\n"
+                + "4.  Keluar\n"
                 + "Silahkan masukkan pilihan Anda : ");
     }
     static int temp, i, j;
@@ -39,26 +38,8 @@ public class Method_main {
                             System.out.println();
                             break;
                         }
+                        
                         case 2:
-                        {
-                            System.out.println("Sorting dengan optimalisasi Bubble Sort");
-                            System.out.print("Masukkan jumlah data : ");
-                            temp = input.nextInt();
-                            int a[] = new int [temp];
-                            System.out.println("Masukkan data : ");
-                            for(i=0; i<a.length; i++)
-                                a[i] = input.nextInt();
-                            System.out.print("Data sebelum disorting : ");
-                            for(i=0; i<a.length; i++)
-                                System.out.print(a[i]+" ");
-                            Sorting.Opt_bubbleSort(a);
-                            System.out.print("\nData setelah disorting : ");
-                            for(i=0; i<a.length; i++)
-                                System.out.print(a[i]+" ");
-                            System.out.println();
-                            break;
-                        }
-                        case 3:
                         {
                             System.out.println("Sorting dengan Selection Sort");
                             System.out.print("Masukkan jumlah data : ");
@@ -77,7 +58,7 @@ public class Method_main {
                             System.out.println();
                             break;
                         }
-                        case 4:
+                        case 3:
                         {
                             System.out.println("Sorting dengan Insertion Sort");
                             System.out.print("Masukkan jumlah data : ");
@@ -96,7 +77,7 @@ public class Method_main {
                             System.out.println();
                             break;
                         }
-                        case 5:
+                        case 4:
                         {
                             System.out.println("Anda telah keluar, Thanks");
                             System.exit(0);
